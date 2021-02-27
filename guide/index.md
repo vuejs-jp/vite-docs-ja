@@ -1,22 +1,22 @@
-# Getting Started
+# はじめに
 
-## Overview
+## 概要
 
-Vite (French word for "fast", pronounced `/vit/`) is a build tool that aims to provide a faster and leaner development experience for modern web projects. It consists of two major parts:
+Vite（フランス語で「速い」という意味の単語で `/vit/` と発音）は、現代の Web プロジェクトのために、より速く無駄のない開発体験を提供することを目的としたビルドツールです。2 つの主要な部分で構成されています:
 
-- A dev server that provides [rich feature enhancements](./features) over [native ES modules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), for example extremely fast [Hot Module Replacement (HMR)](./features#hot-module-replacement).
+- 非常に高速な [Hot Module Replacement (HMR)](./features#hot-module-replacement) など、[ネイティブ ES モジュール](https://developer.mozilla.org/ja/docs/Web/JavaScript/Guide/Modules)を利用した[豊富な機能拡張](./features)を提供する開発サーバー。
 
-- A build command that bundles your code with [Rollup](https://rollupjs.org), pre-configured to output highly optimized static assets for production.
+- [Rollup](https://rollupjs.org) でコードをバンドルするビルドコマンド。プロダクション用に高度に最適化された静的アセットを出力するように事前に設定されています。
 
-Vite is opinionated and comes with sensible defaults out of the box, but is also highly extensible via its [Plugin API](./api-plugin) and [JavaScript API](./api-javascript) with full typing support.
+Vite は使い方が決まっていて、すぐに使える実用的なデフォルトが付属していますが、完全な型サポートのある [Plugin API](./api-plugin) と [JavaScript API](./api-javascript) によって高い拡張性もあります。
 
-You can learn more about the rationale behind the project in the [Why Vite](./why) section.
+プロジェクトの背景にある基本原理について、[Why Vite](./why) セクションで詳しく知ることができます。
 
-## Browser Support
+## ブラウザ対応
 
-- For development: [native ESM dynamic import support](https://caniuse.com/es6-module-dynamic-import) is required.
+- 開発時: [ネイティブ ESM のダイナミックインポート対応](https://caniuse.com/es6-module-dynamic-import)が必要です。
 
-- For production: the default build targets browsers that support [native ESM via script tags](https://caniuse.com/es6-module). Legacy browsers can be supported via the official [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) - see the [Building for Production](./build) section for more details.
+- プロダクション用: デフォルトのビルドは [script タグでのネイティブ ESM 読込](https://caniuse.com/es6-module)に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [Building for Production](./build) セクションをご覧ください。
 
 ## Scaffolding Your First Vite Project
 
