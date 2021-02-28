@@ -18,40 +18,40 @@ Vite は使い方が決まっていて、すぐに使える実用的なデフォ
 
 - プロダクション用: デフォルトのビルドは [script タグでのネイティブ ESM 読込](https://caniuse.com/es6-module)に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [Building for Production](./build) セクションをご覧ください。
 
-## Scaffolding Your First Vite Project
+## 最初の Vite プロジェクトを生成する
 
-::: tip Compatibility Note
-Vite requires [Node.js](https://nodejs.org/en/) version >=12.0.0.
+::: tip 互換性について
+Vite は [Node.js](https://nodejs.org/en/) >=12.0.0 のバージョンが必要です。
 :::
 
-With NPM:
+NPM を使う場合:
 
 ```bash
 $ npm init @vitejs/app
 ```
 
-With Yarn:
+Yarn を使う場合:
 
 ```bash
 $ yarn create @vitejs/app
 ```
 
-Then follow the prompts!
+あとは画面表示に従ってください！
 
-You can also directly specify the project name and the template you want to use via additional command line options. For example, to scaffold a Vite + Vue project, run:
+プロジェクト名や使用するテンプレートは、追加のコマンドラインオプションによって直接指定することもできます。例えば Vite + Vue のプロジェクトを生成するには以下のコマンドを実行します:
 
 ```bash
 # npm 6.x
 npm init @vitejs/app my-vue-app --template vue
 
-# npm 7+, extra double-dash is needed:
+# npm 7+ は追加で 2 つのダッシュが必要:
 npm init @vitejs/app my-vue-app -- --template vue
 
 # yarn
 yarn create @vitejs/app my-vue-app --template vue
 ```
 
-Supported template presets include:
+サポートされているテンプレートプリセットは以下のとおりです:
 
 - `vanilla`
 - `vue`
@@ -63,21 +63,21 @@ Supported template presets include:
 - `lit-element`
 - `lit-element-ts`
 
-See [@vitejs/create-app](https://github.com/vitejs/vite/tree/main/packages/create-app) for more details on each template.
+各テンプレートの詳細は [@vitejs/create-app](https://github.com/vitejs/vite/tree/main/packages/create-app) を参照してください。
 
-## `index.html` and Project Root
+## `index.html` とプロジェクトルート
 
-One thing you may have noticed is that in a Vite project, `index.html` is front-and-central instead of being tucked away inside `public`. This is intentional: during development Vite is a server, and `index.html` is the entry point to your application.
+お気づきかもしれませんが、Vite プロジェクトでは `index.html` は `public` 内に隠れているのではなく、最も目立つ場所にあります。これは意図的なものです。開発中、Vite はサーバーであり、`index.html` はアプリケーションのエントリーポイントです。
 
-Vite treats `index.html` as source code and part of the module graph. It resolves `<script type="module" src="...">` that references your JavaScript source code. Even inline `<script type="module">` and CSS referenced via `<link href>` also enjoy Vite-specific features. In addition, URLs inside `index.html` are automatically rebased so there's no need for special `%PUBLIC_URL%` placeholders.
+Vite は `index.html` をソースコードとして、またモジュールグラフの一部として扱います。JavaScript のソースコードを参照している `<script type="module" src="...">` を解決します。インラインの `<script type="module">` や `<link href>` で参照される CSS も Vite 固有の機能を利用できます。さらに、`index.html` 内の URL は自動的にリベースされるため、特別な `%PUBLIC_URL%` プレースホルダは必要ありません。
 
-Similar to static http servers, Vite has the concept of a "root directory" from which your files are served from. You will see it referenced as `<root>` throughout the rest of the docs. Absolute URLs in your source code will be resolved using the project root as base, so you can write code as if you are working with a normal static file server (except way more powerful!). Vite is also capable of handling dependencies that resolve to out-of-root file system locations, which makes it usable even in a monorepo-based setup.
+静的な http サーバーと同様に、Vite には、ファイルの提供元となる「ルートディレクトリ」の概念があります。ドキュメントの残りの部分では `<root>` として示されています。ソースコード内の絶対 URL は、プロジェクトルートをベースとして使って解決されるため、通常の静的ファイルサーバーを使用しているかのようにコードを記述できます（より強力な方法を除く）。Vite はルート外のファイルシステムの場所に解決される依存関係を処理することもできるため、モノレポベースの構成でも使用できます。
 
-Vite also supports [multi-page apps](./build#multi-page-app) with multiple `.html` entry points.
+Vite は複数の `.html` エントリーポイントを持つ[マルチページアプリ](./build#multi-page-app)にも対応しています。
 
-#### Specifying Alternative Root
+#### 代替ルートの指定
 
-Running `vite` starts the dev server using the current working directory as root. You can specify an alternative root with `vite serve some/sub/dir`.
+`vite` を実行すると、現在の作業ディレクトリをルートとして使用する開発サーバーが起動します。`vite serve some/sub/dir` で代替ルートを指定できます。
 
 ## Command Line Interface
 
