@@ -193,12 +193,13 @@ import InlineWorker from './worker.js?worker&inline'
 
 ## JSON
 
-JSON files can be directly imported - named imports are also supported:
+
+JSON ファイルは直接インポートできます - また、名前付きインポートもサポートされています：:
 
 ```js
-// import the entire object
+// オブジェクト全体をインポートする場合
 import json from './example.json'
-// import a root field as named exports - helps with treeshaking!
+// 名前付きエクスポートとしてルートフィールドをインポートします - ツリーシェイクに役立ちます！
 import { field } from './example.json'
 ```
 
