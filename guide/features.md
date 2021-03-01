@@ -27,14 +27,13 @@ Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します
 
 ## TypeScript
 
-Vite supports importing `.ts` files out of the box.
+Vite は `.ts` ファイルをインポートすることをサポートしています。
 
-Vite only performs transpilation on `.ts` files and does **NOT** perform type checking. It assumes type checking is taken care of by your IDE and build process (you can run `tsc --noEmit` in the build script).
+Vite は `.ts` ファイルに対してのみ変換を実行し、型チェックは **実行しません**。 型チェックは IDE とビルドの過程にて実行されることを前提としています (ビルドスクリプトを `tsc --noEmit` で実行することができます)。
 
-Vite uses [esbuild](https://github.com/evanw/esbuild) to transpile TypeScript into JavaScript which is about 20~30x faster than vanilla `tsc`, and HMR updates can reflect in the browser in under 50ms.
+Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScriptをJavaScriptに変換します。 これは、vanilla の `tsc` よりも約20〜30倍高速であり、HMR の更新は50ミリ秒未満でブラウザーに反映されます
 
-Note that because `esbuild` only performs transpilation without type information, it doesn't support certain features like const enum and implicit type-only imports. You must set `"isolatedModules": true` in your `tsconfig.json` under `compilerOptions` so that TS will warn you against the features that do not work with isolated transpilation.
-
+`esbuild` は型情報なしでビルドを実行するため、 const や enum の暗黙の型のみのインポートなどの特定の機能はサポートしていません。 TypeScript が分離されたトランスパイルで機能しない機能に対して警告するように、`compilerOptions`の下の `tsconfig.json` で `"isolatedModules"：true` を設定する必要があります。
 ### Client Types
 
 Vite's default types are for its Node.js API. To shim the environment of client side code in a Vite application, add `vite/client` to `compilerOptions.types` of your `tsconfig`:
