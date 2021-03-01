@@ -1,30 +1,29 @@
-# Features
+# 特徴
 
-At the very basic level, developing using Vite is not that much different from using a static file server. However, Vite provides many enhancements over native ESM imports to support various features that are typically seen in bundler-based setups.
+基本的に、Viteを使用した開発は静的ファイルサーバを使用した時とそれほど変わりません。 しかし、Viteはバンドラベースのセットアップで一般的な機能をサポートするためにネイティブESMをインポートすることで様々な拡張機能を提供します。
 
-## NPM Dependency Resolving and Pre-Bundling
+## NPM の依存関係の解決と先読みされるバンドル
 
-Native ES imports do not support bare module imports like the following:
+ネイティブ ES のインポートは次のような生のモジュールをサポートしていません:
 
 ```js
 import { someMethod } from 'my-dep'
 ```
 
-The above will throw an error in the browser. Vite will detect such bare module imports in all served source files and perform the following:
+上のようなコードはブラウザでエラーになります。Vite は提供される全てのソースファイルでこのような生のモジュールのインポートを検出し以下を実行します:
+1. [先読みバンドル](./dep-pre-bundling) はページの読み込み速度を改善し、CommonJS / UMDモジュールを ESM に変換します。 先読みバンドルは [esbuild](http://esbuild.github.io/) で実行され、Vite のコールドスタート時間を  JavaScript ベースのバンドラーよりも大幅に高速化します。
 
-1. [Pre-bundle](./dep-pre-bundling) them to improve page loading speed and convert CommonJS / UMD modules to ESM. The pre-bundling step is performed with [esbuild](http://esbuild.github.io/) and makes Vite's cold start time significantly faster than any JavaScript-based bundler.
+2. インポートを `/node_modules/.vite/my-dep.js?v=f3sf2ebd` のように書き換えることでブラウザが正しくモジュールをインポートできるようにします。
 
-2. Rewrite the imports to valid URLs like `/node_modules/.vite/my-dep.js?v=f3sf2ebd` so that the browser can import them properly.
+**依存関係は強力にキャッシュされます**
 
-**Dependencies are Strongly Cached**
-
-Vite caches dependency requests via HTTP headers, so if you wish to locally edit/debug a dependency, follow the steps [here](./dep-pre-bundling#browser-cache).
+ViteはHTTPヘッダーを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#browser-cache)に従います。
 
 ## Hot Module Replacement
 
-Vite provides an [HMR API](./api-hmr) over native ESM. Frameworks with HMR capabilities can leverage the API to provide instant, precise updates without reloading the page or blowing away application state. Vite provides first-party HMR integrations for [Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) and [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh). There are also official integrations for Preact via [@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite).
+Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。 HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。 Vite は[Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh) ファーストパーティの HMR を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した preact の統合された公式のライブラリもあります。
 
-Note you don't need to manually set these up - when you [create an app via `@vitejs/create-app`](./), the selected templates would have these pre-configured for you already.
+これらを手動で設定する必要がないことには注意してください -  [create an app via `@vitejs/create-app`](./) を介してアプリケーションを作成する場合、これらはすでに構成されています。
 
 ## TypeScript
 
