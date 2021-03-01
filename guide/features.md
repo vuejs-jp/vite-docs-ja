@@ -34,9 +34,10 @@ Vite は `.ts` ファイルに対してのみ変換を実行し、型チェッ�
 Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScriptをJavaScriptに変換します。 これは、vanilla の `tsc` よりも約20〜30倍高速であり、HMR の更新は50ミリ秒未満でブラウザーに反映されます
 
 `esbuild` は型情報なしでビルドを実行するため、 const や enum の暗黙の型のみのインポートなどの特定の機能はサポートしていません。 TypeScript が分離されたトランスパイルで機能しない機能に対して警告するように、`compilerOptions`の下の `tsconfig.json` で `"isolatedModules"：true` を設定する必要があります。
-### Client Types
 
-Vite's default types are for its Node.js API. To shim the environment of client side code in a Vite application, add `vite/client` to `compilerOptions.types` of your `tsconfig`:
+### クライアントのタイプ
+
+Vite はデフォルトでは Node.js の API を提供します. Vite でクライアント用のコードを使用するには `tsconfig` で `compilerOptions.types` に `vite/client`  を追加します:
 
 ```json
 {
@@ -46,11 +47,11 @@ Vite's default types are for its Node.js API. To shim the environment of client 
 }
 ```
 
-This will provide the following type shims:
+これにより次のことが提供されます:
 
-- Asset imports (e.g. importing an `.svg` file)
-- Types for the Vite-injected [env variables](./env-and-mode#env-variables) on `import.meta.env`
-- Types for the [HMR API](./api-hmr) on `import.meta.hot`
+- アセットのインポート (例: `.svg` ファイルのインポート)
+- `import.meta.env` に Vite が挿入した [env variables](./env-and-mode#env-variables) のタイプ
+- `import.meta.hot` の [HMR API](./api-hmr) のタイプ
 
 ## Vue
 
