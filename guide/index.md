@@ -79,25 +79,25 @@ Vite は複数の `.html` エントリーポイントを持つ[マルチペー�
 
 `vite` を実行すると、現在の作業ディレクトリをルートとして使用する開発サーバーが起動します。`vite serve some/sub/dir` で代替ルートを指定できます。
 
-## Command Line Interface
+## コマンドラインインタフェース
 
-In a project where Vite is installed, you can use the `vite` binary in your npm scripts, or run it directly with `npx vite`. Here is the default npm scripts in a scaffolded Vite project:
+Vite がインストールされているプロジェクトでは npm スクリプトで `vite` バイナリを使用したり、`npx vite` で直接実行できます。生成された Vite プロジェクトのデフォルトの npm スクリプトは次のとおりです:
 
 ```json
 {
   "scripts": {
-    "dev": "vite", // start dev server
-    "build": "vite build", // build for production
-    "serve": "vite preview" // locally preview production build
+    "dev": "vite", // 開発サーバーを起動
+    "build": "vite build", // プロダクション用にビルド
+    "serve": "vite preview" // プロダクション用ビルドをローカルでプレビュー
   }
 }
 ```
 
-You can specify additional CLI options like `--port` or `--https`. For a full list of CLI options, run `npx vite --help` in your project.
+`--port` や `--https` のような追加の CLI オプションを指定できます。すべての CLI オプションのリストは、プロジェクト内で `npx vite --help` を実行してください。
 
-## Using Unreleased Commits
+## 未リリースのコミットの使用
 
-If you can't wait for a new release to test the latest features, you will need to clone the [vite repo](https://github.com/vitejs/vite) to your local machine and then build and link it yourself ([Yarn 1.x](https://classic.yarnpkg.com/lang/en/) is required):
+最新機能を試すために新しいリリースを待つことができない場合は、ローカルマシンに [vite repo](https://github.com/vitejs/vite) をクローンしてから自分でビルドとリンクをする必要があります（[Yarn 1.x](https://classic.yarnpkg.com/lang/en/) が必要）:
 
 ```bash
 git clone https://github.com/vitejs/vite.git
@@ -108,4 +108,4 @@ yarn build
 yarn link
 ```
 
-Then go to your vite based project and run `yarn link vite`. Now restart the development server (`yarn dev`) to ride on the bleeding edge!
+その後 vite ベースのプロジェクトに移動し、`yarn link vite` を実行してください。そして開発サーバーを再起動（`yarn dev`）して最先端の技術に乗っていきましょう！
