@@ -94,21 +94,21 @@ export default {
 
 ## CSS
 
-Importing `.css` files will inject its content to the page via a `<style>` tag with HMR support. You can also retrieve the processed CSS as a string as the module's default export.
+`.css` ファイルをインポートすると、HMRをサポートする `<style>` タグを介してそのコンテンツがページに挿入されます。モジュールのデフォルトのエクスポートとして、処理されたCSSを文字列として取得することもできます。
 
-### `@import` Inlining and Rebasing
+### `@import` のインライン化と結合
 
-Vite is pre-configured to support CSS `@import` inlining via `postcss-import`. Vite aliases are also respected for CSS `@import`. In addition, all CSS `url()` references, even if the imported files are in different directories, are always automatically rebased to ensure correctness.
+Viteは、`postcss-import` を介した CSS `@ import` のインライン化をサポートするように事前構成されています。 CSS `@import` では、Viteエイリアスも尊重されます。さらに、インポートされたファイルが異なるディレクトリにある場合でも、すべてのCSS `url()` 参照は、正確性を確保するために常に自動的に結合されます。
 
-`@import` aliases and URL rebasing are also supported for Sass and Less files (see [CSS Pre-processors](#css-pre-processors)).
+`@import` エイリアスと URL の結合もSassファイルとLessファイルでサポートされています (詳しくはこちら [CSS Pre-processors](#css-pre-processors))。
 
 ### PostCSS
 
-If the project contains valid PostCSS config (any format supported by [postcss-load-config](https://github.com/postcss/postcss-load-config), e.g. `postcss.config.js`), it will be automatically applied to all imported CSS.
+もしプロジェクトに有効な PostCSS が含まれている場合 ([postcss-load-config](https://github.com/postcss/postcss-load-config) でサポートされている任意の形式、例: `postcss.config.js`)、インポートされたすべてのCSSに自動的に適用されます。
 
 ### CSS Modules
 
-Any CSS file ending with `.module.css` is considered a [CSS modules file](https://github.com/css-modules/css-modules). Importing such a file will return the corresponding module object:
+`.module.css` で終わる全ての CSS ファイルは全て [CSS modules file](https://github.com/css-modules/css-modules) とみなされます。 このようなファイルをインポートすると、対応するモジュールオブジェクトが返されます:
 
 ```css
 /* example.module.css */
@@ -122,9 +122,9 @@ import classes from './example.module.css'
 document.getElementById('foo').className = classes.red
 ```
 
-CSS modules behavior can be configured via the [`css.modules` option](/config/#css-modules).
+CSS モジュールの動作は [`css.modules` option](/config/#css-modules) を参考にしてください。
 
-If `css.modules.localsConvention` is set to enable camelCase locals (e.g. `localsConvention: 'camelCaseOnly'`), you can also use named imports:
+`css.modules.localsConvention` がキャメルケースローカルを有効にするように設定されている場合（例：`localsConvention: 'camelCaseOnly'`）、名前付きインポートを使用することもできます:
 
 ```js
 // .apply-color -> applyColor
@@ -132,11 +132,12 @@ import { applyColor } from './example.module.css'
 document.getElementById('foo').className = applyColor
 ```
 
-### CSS Pre-processors
+### CSS プリプロセッサ
 
-Because Vite targets modern browsers only, it is recommended to use native CSS variables with PostCSS plugins that implement CSSWG drafts (e.g. [postcss-nesting](https://github.com/jonathantneal/postcss-nesting)) and author plain, future-standards-compliant CSS.
 
-That said, Vite does provide built-in support for `.scss`, `.sass`, `.less`, `.styl` and `.stylus` files. There is no need to install Vite-specific plugins for them, but the corresponding pre-processor itself must be installed:
+Vite は最新のブラウザのみを対象としているため、CSSWG ドラフト（[postcss-nesting](https://github.com/jonathantneal/postcss-nesting) など）を実装する PostCSS プラグインでネイティブ CSS 変数を使用し、将来の標準に準拠したプレーンなCSSを作成することをお勧めします。
+
+とは言うものの、Vite は `.scss`、`.sass`、 `.less`、`.styl`、 `.stylus` ファイルの組み込みサポートを提供します。それら にVite 固有のプラグインをインストールする必要はありませんが、対応するプリプロセッサ自体をインストールする必要があります。
 
 ```bash
 # .scss and .sass
@@ -149,46 +150,46 @@ npm install -D less
 npm install -D stylus
 ```
 
-If using Vue single file components, this also automatically enables `<style lang="sass">` et al.
+もし Vue で単一ファイルコンポーネントを使用している場合、これにより、 `<style lang =" sass ">` なども自動的に有効になります。
 
-Vite improves `@import` resolving for Sass and Less so that Vite aliases are also respected. In addition, relative `url()` references inside imported Sass/Less files that are in different directories from the root file are also automatically rebased to ensure correctness.
+Viteは、SassおよびLessの `@import` 解決を改善し、Vite エイリアスも尊重されるようにします。さらに、ルートファイルとは異なるディレクトリにあるインポートされた Sass / Less ファイル内の相対的な `url()` の参照も、正確性を確保するために自動的に結合されます。
 
-`@import` alias and url rebasing are not supported for Stylus due to its API constraints.
+`@import` エイリアスと URL の結合は、API の制約のため、Stylus ではサポートされていません。
 
-You can also use CSS modules combined with pre-processors by prepending `.module` to the file extension, for example `style.module.scss`.
+ファイル拡張子の前に `.module` を付けることで、プリプロセッサと組み合わせて CSS モジュールを使用することもできます（例：`style.module.scss`）。
 
-## Static Assets
+## 静的なアセット
 
-Importing a static asset will return the resolved public URL when it is served:
+静的アセットをインポートすると、提供時に解決されたパブリックURLが返されます:
 
 ```js
 import imgUrl from './img.png'
 document.getElementById('hero-img').src = imgUrl
 ```
 
-Special queries can modify how assets are loaded:
+特別なクエリにより、アセットの読み込み方法を変更できます:
 
 ```js
-// Explicitly load assets as URL
+// アセットを URL として明示的にロードする
 import assetAsURL from './asset.js?url'
 ```
 
 ```js
-// Load assets as strings
+// アセットを文字列として明示的にロードする
 import assetAsString from './shader.glsl?raw'
 ```
 
 ```js
-// Load Web Workers
+// ウェブワーカーをロードする
 import Worker from './worker.js?worker'
 ```
 
 ```js
-// Web Workers inlined as base64 strings at build time
+// ビルド時に base64 文字列としてインライン化されたウェブワーカー
 import InlineWorker from './worker.js?worker&inline'
 ```
 
-More details in [Static Asset Handling](./assets).
+詳しくは [Static Asset Handling](./assets) を見てください。
 
 ## JSON
 
