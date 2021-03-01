@@ -55,19 +55,19 @@ Vite はデフォルトでは Node.js の API を提供します. Vite でクラ
 
 ## Vue
 
-Vite provides first-class Vue support:
+Vite は Vue に対して最高のサポートをします:
 
-- Vue 3 SFC support via [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
-- Vue 3 JSX support via [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
-- Vue 2 support via [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
+- Vue 3 SFC はこちら [@vitejs/plugin-vue](https://github.com/vitejs/vite/tree/main/packages/plugin-vue)
+- Vue 3 JSX はこちら [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx)
+- Vue 2 はこちら [underfin/vite-plugin-vue2](https://github.com/underfin/vite-plugin-vue2)
 
 ## JSX
 
-`.jsx` and `.tsx` files are also supported out of the box. JSX transpilation is also handled via [ESBuild](https://esbuild.github.io), and defaults to the React 16 flavor. React 17 style JSX support in ESBuild is tracked [here](https://github.com/evanw/esbuild/issues/334).
+`.jsx` と `.tsx` もすぐにサポートされます。 JSX のトランスパイルも [ESBuild](https://esbuild.github.io) を介して行われます, デフォルトはReact16フレーバーですが、ESBuildでのReact17スタイルのJSXサポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
 
-Vue users should use the official [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) plugin, which provides Vue 3 specific features including HMR, global component resolving, directives and slots.
+Vue を使用している人は公式のプラグインである [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) を使用するべきです、 これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 
-If not using JSX with React or Vue, custom `jsxFactory` and `jsxFragment` can be configured using the [`esbuild` option](/config/#esbuild). For example for Preact:
+もしReact、または Vue で JSX を使用していない場合は, [`esbuild` option](/config/#esbuild) を使用して `jsxFactory` および `jsxFragment` を構成することができます。 例えば、 Preact の場合:
 
 ```js
 // vite.config.js
@@ -79,9 +79,9 @@ export default {
 }
 ```
 
-More details in [ESBuild docs](https://esbuild.github.io/content-types/#jsx).
+さらに詳しく知りたい場合は [ESBuild docs](https://esbuild.github.io/content-types/#jsx) を見てください。
 
-You can inject the JSX helpers using `jsxInject` (which is a Vite-only option) to avoid manual imports:
+また、`jsxInject`（Viteのみのオプション）を使用して JSX ヘルパーを挿入し、手動インポートを回避できます。
 
 ```js
 // vite.config.js
