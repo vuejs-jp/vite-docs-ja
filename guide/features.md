@@ -284,9 +284,9 @@ init({
 
 本番ビルドでは、 `assetInlineLimit` よりも小さい` .wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、アセットとして dist ディレクトリにコピーされ、オンデマンドでフェッチされます。
 
-## Web Workers
+## Web ワーカー
 
-A web worker script can be directly imported by appending `?worker` to the import request. The default export will be a custom worker constructor:
+インポートリクエストに `？worker` を追加することで、Web ワーカースクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカーコンストラクタになります:
 
 ```js
 import MyWorker from './worker?worker'
@@ -294,50 +294,50 @@ import MyWorker from './worker?worker'
 const worker = new MyWorker()
 ```
 
-The worker script can also use `import` statements instead of `importScripts()` - note during dev this relies on browser native support and currently only works in Chrome, but for the production build it is compiled away.
+ワーカースクリプトは、`importScripts()` の代わりに `import` ステートメントを使用することもできます - この機能は現在開発中であり、ブラウザーのネイティブサポートに依存し、現在Chromeでのみ機能しますが、本番ビルドではコンパイルされます。
 
-By default, the worker script will be emitted as a separate chunk in the production build. If you wish to inline the worker as base64 strings, add the `inline` query:
+デフォルトでは、ワーカースクリプトは本番ビルドで個別のチャンクとして出力されます。ワーカーを base64 文字列としてインライン化する場合は、`inline` クエリを追加します:
 
 ```js
 import MyWorker from './worker?worker&inline'
 ```
 
-## Build Optimizations
+## ビルドの最適化
 
-> Features listed below are automatically applied as part of the build process and there is no need for explicit configuration unless you want to disable them.
+> 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に構成する必要はありません。
 
-### Dynamic Import Polyfill
+### ダイナミックインポートされる Polyfill
 
-Vite uses ES dynamic import as code-splitting points. The generated code will also use dynamic imports to load the async chunks. However, native ESM dynamic imports support landed later than ESM via script tags and there is a browser support discrepancy between the two features. Vite automatically injects a light-weight [dynamic import polyfill](https://github.com/GoogleChromeLabs/dynamic-import-polyfill) to ease out that difference.
+Vite は、コード分割ポイントとして ES ダイナミックインポートを使用します。 生成されたコードは、ダイナミックインポートを使用して非同期チャンクもロードします。 しかし、ネイティブ ESM ダイナミックインポートサポートは、スクリプトタグを介して ESM よりも遅く着陸し、2つの機能の間にブラウザーサポートの不一致があります。 Vite は、軽量の[ダイナミックインポートされる Polyfill](https://github.com/GoogleChromeLabs/dynamic-import-polyfill) を自動的に挿入して、その違いを緩和します。
 
-If you know you are only targeting browsers with native dynamic import support, you can explicitly disable this feature via [`build.polyfillDynamicImport`](/config/#build-polyfilldynamicimport).
+ネイティブの動的インポートをサポートするブラウザのみを対象としていることがわかっている場合は、この機能を明示的に無効にすることができます。 詳しくは [`build.polyfillDynamicImport`](/config/#build-polyfilldynamicimport) をご覧ください
 
-### CSS Code Splitting
+### CSS のコード分割
 
-Vite automatically extracts the CSS used by modules in an async chunk and generate a separate file for it. The CSS file is automatically loaded via a `<link>` tag when the associated async chunk is loaded, and the async chunk is guaranteed to only be evaluated after the CSS is loaded to avoid [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.).
+Vite は、非同期チャンク内のモジュールによって使用される CSS を自動的に抽出し、そのための個別のファイルを生成します。 CSS ファイルは、関連付けられた非同期チャンクが読み込まれるときに `<link>` タグを介して自動的に読み込まれ、[FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content#:~:text=A%20flash%20of%20unstyled%20content,before%20all%20information%20is%20retrieved.) を回避するために、CSSが読み込まれた後にのみ非同期チャンクが評価されることが保証されます。
 
-If you'd rather have all the CSS extracted into a single file, you can disable CSS code splitting by setting [`build.cssCodeSplit`](/config/#build-csscodesplit) to `false`.
+もしすべての CSS を1つのファイルに抽出したい場合は、[`build.cssCodeSplit`](/config/#build-csscodesplit) を `false` に設定することで、CSS コードの分割を無効にできます。
 
-### Preload Directives Generation
+### プリロードディレクティブの生成
 
-Vite automatically generates `<link rel="modulepreload">` directives for entry chunks and their direct imports in the built HTML.
+Vite は、エントリチャンクとビルドされた HTML への直接インポート用の `<link rel="modulepreload">` ディレクティブを自動的に生成します。
 
-### Async Chunk Loading Optimization
+### 非同期チャンク読み込みの最適化
 
-In real world applications, Rollup often generates "common" chunks - code that is shared between two or more other chunks. Combined with dynamic imports, it is quite common to have the following scenario:
+実際のアプリケーションでは、Rollup は「共通の」チャンク（2つ以上の他のチャンク間で共有されるコード）を生成することがよくあります。動的インポートと組み合わせると、次のシナリオが発生するのが非常に一般的です。
 
 ![graph](/images/graph.png)
 
-In the non-optimized scenarios, when async chunk `A` is imported, the browser will have to request and parse `A` before it can figure out that it also needs the common chunk `C`. This results in an extra network roundtrip:
+最適化されていないシナリオでは、非同期チャンク `A` がインポートされると、ブラウザは、共通チャンク `C` も必要であると判断する前に、`A` を要求して解析する必要があります。これにより、余分なネットワークラウンドトリップが発生します。
 
 ```
 Entry ---> A ---> C
 ```
 
-Vite automatically rewrites code-split dynamic import calls with a preload step so that when `A` is requested, `C` is fetched **in parallel**:
+Vite は、プリロードステップを使用してコード分割動的インポート呼び出しを自動的に書き換え、 `A` が要求されたときに、`C` が**並列**にフェッチされるようにします:
 
 ```
 Entry ---> (A + C)
 ```
 
-It is possible for `C` to have further imports, which will result in even more roundtrips in the un-optimized scenario. Vite's optimization will trace all the direct imports to completely eliminate the roundtrips regardless of import depth.
+これは `C` がさらにインポートする可能性があり、最適化されていないシナリオではさらに多くのラウンドトリップが発生します。 Vite の最適化は、すべての直接インポートをトレースして、インポートの深さに関係なく、ラウンドトリップを完全に排除します。
