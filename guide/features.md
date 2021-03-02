@@ -258,7 +258,7 @@ const modules = {
 
 ## Web Assembly
 
-Pre-compiled `.wasm` files can be directly imported - the default export will be an initialization function that returns a Promise of the exports object of the wasm instance:
+プリコンパイルされた `.wasm` ファイルは直接インポートできます - デフォルトのエクスポートは、wasm インスタンスの exports オブジェクトの Promise を返す初期化関数になります:
 
 ```js
 import init from './example.wasm'
@@ -268,7 +268,7 @@ init().then((exports) => {
 })
 ```
 
-The init function can also take the `imports` object which is passed along to `WebAssembly.instantiate` as its second argument:
+init関数は、第2引数として `WebAssembly.instantiate` に渡される` imports` オブジェクトを受け取ることもできます:
 
 ```js
 init({
@@ -282,7 +282,7 @@ init({
 })
 ```
 
-In the production build, `.wasm` files smaller than `assetInlineLimit` will be inlined as base64 strings. Otherwise, they will be copied to the dist directory as an asset and fetched on-demand.
+本番ビルドでは、 `assetInlineLimit` よりも小さい` .wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、アセットとして dist ディレクトリにコピーされ、オンデマンドでフェッチされます。
 
 ## Web Workers
 
