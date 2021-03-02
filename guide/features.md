@@ -203,25 +203,25 @@ import json from './example.json'
 import { field } from './example.json'
 ```
 
-## Glob Import
+## Glob のインポート
 
-Vite supports importing multiple modules from the file system via the special `import.meta.glob` function:
+Viteは、特別な `import.meta.glob` 関数を介してファイルシステムから複数のモジュールをインポートすることをサポートしています:
 
 ```js
 const modules = import.meta.glob('./dir/*.js')
 ```
 
-The above will be transformed into the following:
+上のコードは以下のように変換されます:
 
 ```js
-// code produced by vite
+// vite によって生成されたコード
 const modules = {
   './dir/foo.js': () => import('./dir/foo.js'),
   './dir/bar.js': () => import('./dir/bar.js')
 }
 ```
 
-You can then iterate over the keys of the `modules` object to access the corresponding modules:
+次に、 `modules` オブジェクトのキーを繰り返し処理して、対応するモジュールにアクセスできます:
 
 ```js
 for (const path in modules) {
@@ -231,16 +231,16 @@ for (const path in modules) {
 }
 ```
 
-Matched files are by default lazy loaded via dynamic import and will be split into separate chunks during build. If you'd rather import all the modules directly (e.g. relying on side-effects in these modules to be applied first), you can use `import.meta.globEager` instead:
+一致したファイルはデフォルトで動的インポートを介して遅延ロードされ、ビルド中に個別のチャンクに分割されます。 もしあなたがすべてのモジュールを直接インポートする場合（たとえば、最初に適用されるこれらのモジュールの副作用に依存する場合）、代わりに `import.meta.globEager` を使用できます:
 
 ```js
 const modules = import.meta.globEager('./dir/*.js')
 ```
 
-The above will be transformed into the following:
+上のコードは以下のように変換されます:
 
 ```js
-// code produced by vite
+// vite によって生成されたコード
 import * as __glob__0_0 from './dir/foo.js'
 import * as __glob__0_1 from './dir/bar.js'
 const modules = {
@@ -249,11 +249,12 @@ const modules = {
 }
 ```
 
-Note that:
+注意点:
 
-- This is a Vite-only feature and is not a web or ES standard.
-- The glob patterns are treated like import specifiers: they must be either relative (start with `./`) or absolute (start with `/`, resolved relative to project root). Globbing from dependencies is not supported.
-- The glob matching is done via `fast-glob` - check out its documentation for [supported glob patterns](https://github.com/mrmlnc/fast-glob#pattern-syntax).
+- これは Vite のみの機能であり、Web または ES の標準ではありません。
+- Glob パターンはインポート指定子のように扱われます。相対パス（`./`で始まる）または絶対パス（`/`で始まり、プロジェクトルートに対して解決される）のいずれかである必要があります。依存関係からの Glob はサポートされていません。
+- The glob matching is done via `fast-glob` - check out its documentation for 
+- Glob のマッチングは `fast-glob` を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
 
 ## Web Assembly
 
