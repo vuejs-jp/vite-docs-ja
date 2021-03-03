@@ -8,15 +8,15 @@ Vite（フランス語で「速い」という意味の単語で `/vit/` と発�
 
 - [Rollup](https://rollupjs.org) でコードをバンドルするビルドコマンド。プロダクション用に高度に最適化された静的アセットを出力するように事前に設定されています。
 
-Vite は使い方が決まっていて、すぐに使える実用的なデフォルトが付属していますが、完全な型サポートのある [Plugin API](./api-plugin) と [JavaScript API](./api-javascript) によって高い拡張性もあります。
+Vite はすぐに使える実用的なデフォルトが付属していて、プロジェクト生成された構成のままで使えるように設計されていますが、完全な型サポートのある [Plugin API](./api-plugin) と [JavaScript API](./api-javascript) によって高い拡張性もあります。
 
 プロジェクトの背景にある基本原理について、[Why Vite](./why) セクションで詳しく知ることができます。
 
 ## ブラウザ対応
 
-- 開発時: [ネイティブ ESM のダイナミックインポート対応](https://caniuse.com/es6-module-dynamic-import)が必要です。
+- 開発向け: [ネイティブ ESM のダイナミックインポート対応](https://caniuse.com/es6-module-dynamic-import)が必要です。
 
-- プロダクション用: デフォルトのビルドは [script タグでのネイティブ ESM 読込](https://caniuse.com/es6-module)に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [Building for Production](./build) セクションをご覧ください。
+- プロダクション向け: デフォルトのビルドは [script タグでのネイティブ ESM 読込](https://caniuse.com/es6-module)に対応しているブラウザが対象です。レガシーブラウザは公式の [@vitejs/plugin-legacy](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) でサポートされています。詳細は [Building for Production](./build) セクションをご覧ください。
 
 ## 最初の Vite プロジェクトを生成する
 
