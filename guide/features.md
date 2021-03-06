@@ -15,13 +15,13 @@ import { someMethod } from 'my-dep'
 
 2. インポートを `/node_modules/.vite/my-dep.js?v=f3sf2ebd` のように書き換えることでブラウザが正しくモジュールをインポートできるようにします。
 
-**依存関係は強力にキャッシュされます**
+**依存関係は積極的にキャッシュされます**
 
 ViteはHTTPヘッダーを介して依存関係のリクエストをキャッシュするため、依存関係をローカルで編集/デバッグする場合は、[ここの手順](./dep-pre-bundling#browser-cache)に従います。
 
 ## Hot Module Replacement
 
-Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。 HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。 Vite は[Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh) ファーストパーティの HMR を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した preact の統合された公式のライブラリもあります。
+Vite はネイティブ ESM を介して [HMR API](./api-hmr) を提供します。 HMR 機能を備えたフレームワークは、API を活用して、ページを再読み込みしたり、アプリケーションの状態を損失することなく即座に正確な更新を提供できます。 Vite は[Vue Single File Components](https://github.com/vitejs/vite/tree/main/packages/plugin-vue) および [React Fast Refresh](https://github.com/vitejs/vite/tree/main/packages/plugin-react-refresh) ファーストパーティの HMR を提供します。[@prefresh/vite](https://github.com/JoviDeCroock/prefresh/tree/main/packages/vite) を介した Preact の統合された公式のライブラリもあります。
 
 これらを手動で設定する必要がないことには注意してください -  [create an app via `@vitejs/create-app`](./) を介してアプリケーションを作成する場合、これらはすでに構成されています。
 
@@ -63,7 +63,7 @@ Vite は Vue に対して最高のサポートをします:
 
 ## JSX
 
-`.jsx` と `.tsx` もすぐにサポートされます。 JSX のトランスパイルも [ESBuild](https://esbuild.github.io) を介して行われます, デフォルトはReact16フレーバーですが、ESBuildでのReact17スタイルのJSXサポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
+`.jsx` と `.tsx` も標準サポートされます。 JSX のトランスパイルも [ESBuild](https://esbuild.github.io) を介して行われます, デフォルトはReact16フレーバーですが、ESBuildでのReact17スタイルのJSXサポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
 
 Vue を使用している人は公式のプラグインである [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) を使用するべきです、 これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 
@@ -253,7 +253,6 @@ const modules = {
 
 - これは Vite のみの機能であり、Web または ES の標準ではありません。
 - Glob パターンはインポート指定子のように扱われます。相対パス（`./`で始まる）または絶対パス（`/`で始まり、プロジェクトルートに対して解決される）のいずれかである必要があります。依存関係からの Glob はサポートされていません。
-- The glob matching is done via `fast-glob` - check out its documentation for 
 - Glob のマッチングは `fast-glob` を介して行われます。サポートされている Glob パターンについては、その[ドキュメント](https://github.com/mrmlnc/fast-glob#pattern-syntax)を確認してください。
 
 ## Web Assembly
@@ -284,7 +283,7 @@ init({
 
 本番ビルドでは、 `assetInlineLimit` よりも小さい` .wasm` ファイルが base64 文字列としてインライン化されます。それ以外の場合は、アセットとして dist ディレクトリにコピーされ、オンデマンドでフェッチされます。
 
-## Web ワーカー
+## Web Workers
 
 インポートリクエストに `？worker` を追加することで、Web ワーカースクリプトを直接インポートできます。デフォルトのエクスポートはカスタムワーカーコンストラクタになります:
 
@@ -306,9 +305,9 @@ import MyWorker from './worker?worker&inline'
 
 > 以下にリストされている機能は、ビルドプロセスの一部として自動的に適用され、無効にする場合を除いて、明示的に構成する必要はありません。
 
-### ダイナミックインポートされる Polyfill
+### dynamic importされる Polyfill
 
-Vite は、コード分割ポイントとして ES ダイナミックインポートを使用します。 生成されたコードは、ダイナミックインポートを使用して非同期チャンクもロードします。 しかし、ネイティブ ESM ダイナミックインポートサポートは、スクリプトタグを介して ESM よりも遅く着陸し、2つの機能の間にブラウザーサポートの不一致があります。 Vite は、軽量の[ダイナミックインポートされる Polyfill](https://github.com/GoogleChromeLabs/dynamic-import-polyfill) を自動的に挿入して、その違いを緩和します。
+Vite は、コード分割ポイントとして ES dynamic importを使用します。 生成されたコードは、dynamic importを使用して非同期チャンクもロードします。 しかし、ネイティブ ESM dynamic importサポートは、スクリプトタグを介して ESM よりも遅く着陸し、2つの機能の間にブラウザーサポートの不一致があります。 Vite は、軽量の[dynamic importされる Polyfill](https://github.com/GoogleChromeLabs/dynamic-import-polyfill) を自動的に挿入して、その違いを緩和します。
 
 ネイティブの動的インポートをサポートするブラウザのみを対象としていることがわかっている場合は、この機能を明示的に無効にすることができます。 詳しくは [`build.polyfillDynamicImport`](/config/#build-polyfilldynamicimport) をご覧ください
 
