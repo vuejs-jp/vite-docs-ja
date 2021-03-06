@@ -1,7 +1,7 @@
-# Server-Side Rendering
+# サーバサイドレンダリング
 
 :::warning Experimental
-SSR support is still experimental and you may encounter bugs and unsupported use cases. Proceed at your own risk.
+SSR のサポートはまだ実験段階であり、バグやサポートされていないユースケースが発生する可能性があります。ご自身の責任で進めてください。
 :::
 
 :::tip Note
