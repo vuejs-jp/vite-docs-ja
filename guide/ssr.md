@@ -197,7 +197,7 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 
 ルートと特定のルートに必要なデータが事前にわかっている場合は、本番 SSR と同じロジックを使用して、これらのルートを静的 HTML に先読みでレンダリングすることができます。これは、SSG の形式と見なすこともできます。 詳しくは [demo pre-render script](https://github.com/vitejs/vite/blob/main/packages/playground/ssr-vue/prerender.js) をご覧ください。
 
-## 外部の SSR
+## 外部 SSR
 
 多くの依存関係は、ESM ファイルと CommonJS ファイルの両方を出荷します。SSR を実行する場合、CommonJS ビルドを提供する依存関係を Vite の SSR トランスフォーム/モジュールシステムから外部化することで、開発とビルドの両方を高速化できます。 例えば、あらかじめバンドルされている ESM バージョンの React をプルして、Node.js 互換に戻す代わりに単純に `require('react')` を使用する方が効率的です。また、SSRバンドルビルドの速度も大幅に向上します。
 
