@@ -66,12 +66,12 @@ const { createServer: createViteServer } = require('vite')
 async function createServer() {
   const app = express()
 
-  // ミドルウェアモードで vite サーバを作成します。これにより、Vite 自体のHTMLが無効になります。
+  // ミドルウェアモードで Vite サーバを作成します。これにより、Vite 自体のHTMLが無効になります。
   // ロジックを提供し、親サーバに制御を任せます。
   const vite = await createViteServer({
     server: { middlewareMode: true }
   })
-  // viteの接続インスタンスをミドルウェアとして使用します。
+  // Vite の接続インスタンスをミドルウェアとして使用します。
   app.use(vite.middlewares)
 
   app.use('*', async (req, res) => {
