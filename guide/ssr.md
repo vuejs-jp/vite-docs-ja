@@ -117,7 +117,7 @@ app.use('*', async (req, res) => {
     // 5. アプリケーションでレンダリングされた HTML をテンプレートに挿入します。
     const html = template.replace(`<!--ssr-outlet-->`, appHtml)
 
-    // 6. レンダリングされた HTML を send します。
+    // 6. レンダリングされた HTML をクライアントに送ります。
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
     // エラーが検出された場合は、vite に stracktrace を修正させて、次のようにマップします。
