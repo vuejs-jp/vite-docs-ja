@@ -84,7 +84,7 @@ async function createServer() {
 createServer()
 ```
 
-ここで `vite` は [ViteDevServer](./api-javascript#vitedevserver) のインスタンスです。 `vite.middlewares` は、接続互換の Node.js フレームワークでミドルウェアとして使用できる [Connect](https://github.com/senchalabs/connect) インスタンスです。
+ここで `vite` は [ViteDevServer](./api-javascript#vitedevserver) のインスタンスです。 `vite.middlewares` は、connect 互換 の Node.js フレームワークでミドルウェアとして使用できる [Connect](https://github.com/senchalabs/connect) インスタンスです。
 
 次のステップはサーバサイドでレンダリングされた HTML を提供するための `*` ハンドラの実装です:
 
