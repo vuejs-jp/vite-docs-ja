@@ -231,7 +231,7 @@ export function mySSRPlugin() {
     name: 'my-ssr',
     transform(code, id, ssr) {
       if (ssr) {
-        // SSR 固有の変換を実行する...
+        // SSR 固有の transform を実行する...
       }
     }
   }
