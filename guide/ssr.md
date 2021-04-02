@@ -4,7 +4,7 @@
 SSR のサポートはまだ実験段階であり、バグやサポートされていないユースケースが発生する可能性があります。ご自身の責任で進めてください。
 :::
 
-:::tip ノート
+:::tip 注意
 SSR は特に、Node.js で同じアプリケーションを実行し、HTML を先読みレンダリングし、最後にクライアントでハイドレートすることをサポートするフロントエンドフレームワーク（ React、Preact、Vue、Svelte など ）を指します。 従来のサーバーサイドフレームワークとの統合をお探しの場合は、代わりに [バックエンド統合ガイド](./backend-integration) を確認してください。
 
 次のガイドは、選択したフレームワークで SSR を使用した経験があることも前提としており、Vite 固有の統合の詳細のみに焦点を当てています。
@@ -83,7 +83,7 @@ async function createServer() {
 createServer()
 ```
 
-ここで `vite` は [ViteDevServer](./api-javascript#vitedevserver) のインスタンスです。 `vite.middlewares` は、接続互換の Node.js フレームワークでミドルウェアとして使用できる [Connect](https://github.com/senchalabs/connect) インスタンスです。
+ここで `vite` は [ViteDevServer](./api-javascript#vitedevserver) のインスタンスです。 `vite.middlewares` は、connect 互換 の Node.js フレームワークでミドルウェアとして使用できる [Connect](https://github.com/senchalabs/connect) インスタンスです。
 
 次のステップはサーバサイドでレンダリングされた HTML を提供するための `*` ハンドラの実装です:
 
@@ -116,7 +116,7 @@ app.use('*', async (req, res) => {
     // 5. アプリケーションでレンダリングされた HTML をテンプレートに挿入します。
     const html = template.replace(`<!--ssr-outlet-->`, appHtml)
 
-    // 6. レンダリングされた HTML を send します。
+    // 6. レンダリングされた HTML をクライアントに送ります。
     res.status(200).set({ 'Content-Type': 'text/html' }).end(html)
   } catch (e) {
     // エラーが検出された場合は、vite に stracktrace を修正させて、次のようにマップします。
@@ -196,19 +196,19 @@ const html = await vueServerRenderer.renderToString(app, ctx)
 
 ルートと特定のルートに必要なデータが事前にわかっている場合は、本番 SSR と同じロジックを使用して、これらのルートを静的 HTML に先読みでレンダリングすることができます。これは、SSG の形式と見なすこともできます。 詳しくは [demo pre-render script](https://github.com/vitejs/vite/blob/main/packages/playground/ssr-vue/prerender.js) をご覧ください。
 
-## 外部の SSR
+## 外部 SSR
 
-多くの依存関係は、ESM ファイルと CommonJS ファイルの両方を出荷します。SSR を実行する場合、CommonJS ビルドを提供する依存関係を Vite の SSR トランスフォーム/モジュールシステムから外部化することで、開発とビルドの両方を高速化できます。 例えば、あらかじめバンドルされている ESM バージョンの React をプルして、Node.js 互換に戻す代わりに単純に `require('react')` を使用する方が効率的です。また、SSRバンドルビルドの速度も大幅に向上します。
+多くの依存関係は、ESM ファイルと CommonJS ファイルの両方を出荷します。SSR を実行する場合、CommonJS ビルドを提供する依存関係を Vite の SSR トランスフォーム/モジュールシステムから外部化することで、開発とビルドの両方を高速化できます。 例えば、あらかじめバンドルされている ESM バージョンの React を用いて、それから変換してそれを Node.js 互換に戻す代わりに、単純に `require('react')` を使用する方が効率的です。また、SSRバンドルビルドの速度も大幅に向上します。
 
 Vite は、次のヒューリスティックに基づいて自動化された SSR 外部化を実行します:
 
-- 依存関係の解決された ESM エントリポイントとそのデフォルトのノードエントリポイントが異なる場合、そのデフォルトのノードエントリはおそらく外部化できる CommonJS ビルドです。例えば、`vue` は ESM ビルドと CommonJS ビルドの両方を出荷するため、自動的に外部化されます。
+- 依存関係の解決された ESM エントリポイントとそのデフォルトの Node エントリポイントが異なる場合、そのデフォルトの Node エントリはおそらく外部化できる CommonJS ビルドです。例えば、`vue` は ESM ビルドと CommonJS ビルドの両方を出荷するため、自動的に外部化されます。
 
 - それ以外の場合、Vite はパッケージのエントリポイントに有効な ESM 構文が含まれているかどうかを確認します。含まれていない場合、パッケージは CommonJS である可能性が高く、外部化されます。例として、`react-dom`は、CommonJS 形式の単一のエントリのみを指定するため、自動的に外部化されます。
 
 このヒューリスティックがエラーにつながる場合は、`ssr.external` および `ssr.noExternal` のオプションを使用して SSR の外部化を手動で調整することができます。
 
-将来的には、このヒューリスティックは、プロジェクトで `type: "module"` が有効になっているかどうかを検出するように改善される可能性があります。これにより、Vite は、SSR 中に動的な `import()` を介してインポートすることにより、ノード互換の ESM ビルドを出荷する依存関係を外部化することもできます。
+将来的には、このヒューリスティックは、プロジェクトで `type: "module"` が有効になっているかどうかを検出するように改善される可能性があります。これにより、Vite は、SSR 中に動的な `import()` を介してインポートすることにより、Node 互換の ESM ビルドを出荷する依存関係を外部化することもできます。
 
 :::warning エイリアスの操作
 あるパッケージを別のパッケージにリダイレクトするエイリアスを設定した場合は、SSR の外部化された依存関係で機能するように、代わりに実際の `node_modules` パッケージにエイリアスを設定することをお勧めします。[Yarn](https://classic.yarnpkg.com/en/docs/cli/add/#toc-yarn-add-alias) と [pnpm](https://pnpm.js.org/en/aliases) の両方で `npm:` のエイリアスをサポートします。
@@ -230,7 +230,7 @@ export function mySSRPlugin() {
     name: 'my-ssr',
     transform(code, id, ssr) {
       if (ssr) {
-        // SSR 固有の変換を実行する...
+        // SSR 固有の transform を実行する...
       }
     }
   }
