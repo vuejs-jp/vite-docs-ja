@@ -38,7 +38,7 @@ Vite は [esbuild](https://github.com/evanw/esbuild) を用いて TypeScript を
 
 ### クライアントのタイプ
 
-Vite はデフォルトでは Node.js の API を提供します. Vite でクライアント用のコードを使用するには `tsconfig` で `compilerOptions.types` に `vite/client`  を追加します:
+Vite はデフォルトでは Node.js の API を提供します。Vite でクライアント用のコードを使用するには `tsconfig` で `compilerOptions.types` に `vite/client`  を追加します:
 
 ```json
 {
@@ -64,11 +64,11 @@ Vite は Vue に対して最高のサポートをします:
 
 ## JSX
 
-`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [ESBuild](https://esbuild.github.io) を介して行われます, デフォルトは React 16 フレーバーですが、ESBuild での React 17 スタイルの JSX サポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
+`.jsx` と `.tsx` も標準サポートされます。JSX のトランスパイルも [ESBuild](https://esbuild.github.io) を介して行われます。デフォルトは React 16 フレーバーですが、ESBuild での React 17 スタイルの JSX サポートが追跡されます。[詳しくはこちら](https://github.com/evanw/esbuild/issues/334)。
 
 Vue を使用している人は公式のプラグインである [@vitejs/plugin-vue-jsx](https://github.com/vitejs/vite/tree/main/packages/plugin-vue-jsx) を使用するべきです、これは、HMR、グローバルコンポーネント解決、ディレクティブ、スロットなど、Vue 3 の固有の機能を提供します。
 
-もし React、または Vue で JSX を使用していない場合は, [`esbuild` option](/config/#esbuild) を使用して `jsxFactory` および `jsxFragment` を構成することができます。例えば、Preact の場合:
+もし React、または Vue で JSX を使用していない場合は、[`esbuild` option](/config/#esbuild) を使用して `jsxFactory` および `jsxFragment` を構成することができます。例えば、Preact の場合:
 
 ```js
 // vite.config.js
