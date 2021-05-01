@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Vite',
-  description: 'Next Generation Frontend Tooling',
+  description: '次世代フロントエンドツール',
   head: [['link', { rel: 'icon', type: 'image/svg+xml', href: '/logo.svg' }]],
   themeConfig: {
     repo: 'vitejs/vite',
@@ -12,7 +12,10 @@ module.exports = {
 
     algolia: {
       apiKey: 'b573aa848fd57fb47d693b531297403c',
-      indexName: 'vitejs'
+      indexName: 'vitejs',
+      searchParameters: {
+        facetFilters: ['tags:en']
+      }
     },
 
     carbonAds: {
@@ -21,11 +24,11 @@ module.exports = {
     },
 
     nav: [
-      { text: 'Guide', link: '/guide/' },
-      { text: 'Config', link: '/config/' },
-      { text: 'Plugins', link: '/plugins/' },
+      { text: 'ガイド', link: '/guide/' },
+      { text: '設定', link: '/config/' },
+      { text: 'プラグイン', link: '/plugins/' },
       {
-        text: 'Links',
+        text: 'リンク',
         items: [
           {
             text: 'Twitter',
@@ -53,6 +56,19 @@ module.exports = {
               'https://github.com/vitejs/vite/blob/main/packages/vite/CHANGELOG.md'
           }
         ]
+      },
+      {
+        text: '言語',
+        items: [
+          {
+            text: '英語',
+            link: 'https://vitejs.dev'
+          },
+          {
+            text: '简体中文',
+            link: 'https://cn.vitejs.dev'
+          }
+        ]
       }
     ],
 
@@ -62,7 +78,7 @@ module.exports = {
       // catch-all fallback
       '/': [
         {
-          text: 'Guide',
+          text: 'ガイド',
           children: [
             {
               text: 'Why Vite',
@@ -77,6 +93,10 @@ module.exports = {
               link: '/guide/features'
             },
             {
+              text: 'Using Plugins',
+              link: '/guide/using-plugins'
+            },
+            {
               text: 'Dependency Pre-Bundling',
               link: '/guide/dep-pre-bundling'
             },
@@ -87,6 +107,10 @@ module.exports = {
             {
               text: 'Building for Production',
               link: '/guide/build'
+            },
+            {
+              text: 'Deploying a Static Site',
+              link: '/guide/static-deploy'
             },
             {
               text: 'Env Variables and Modes',
@@ -111,7 +135,7 @@ module.exports = {
           ]
         },
         {
-          text: 'APIs',
+          text: 'API',
           children: [
             {
               text: 'Plugin API',
