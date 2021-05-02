@@ -20,7 +20,7 @@ JavaScript の文字列と Vue テンプレートの中に現れる文字列も�
 
 - JavaScript の文字列に対しては、ユニコードの​ゼロ幅スペースでその文字列を分割できます（例 `'import.meta\u200b.env.MODE'`）。
 
-- Vue のテンプレートや他の HTML タグに対しては、[`<wbr>` タグ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr)を使うことが出来ます（例 `import.meta.<wbr>env.MODE`）。
+- Vue のテンプレートや他の HTML タグに対しては、[`<wbr>` タグ](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/wbr)を使うことができます（例 `import.meta.<wbr>env.MODE`）。
 
 ## `.env` Files
 
@@ -46,14 +46,14 @@ VITE_SOME_KEY=123
 
 :::warning SECURITY NOTES
 
-- `.env.*.local` ファイルはローカル限定で、センシティブな変数を含めることが出来ます。git にチェックインされるのを防ぐために、`.gitignore` に `.local` を追加すべきです。
+- `.env.*.local` ファイルはローカル限定で、センシティブな変数を含めることができます。git にチェックインされるのを防ぐために、`.gitignore` に `.local` を追加すべきです。
 
 - Vite のソースコードに公開される変数は最終的にクライアントバンドルに入るので、`VITE_*` 変数はセンシティブな情報を含ま*ない*ようにすべきです。
   :::
 
 ### IntelliSense
 
-デフォルトで Vite は `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義出来ますが、`VITE_` で始まるユーザー定義の環境変数に対する TypeScript IntelliSense が欲しくなるかもしれません。
+デフォルトで Vite は `import.meta.env` のための型定義を提供します。`.env.[mode]` ファイルで自前の環境変数を定義できますが、`VITE_` で始まるユーザー定義の環境変数に対する TypeScript IntelliSense が欲しくなるかもしれません。
 
 この目的を達するには、`src` ディレクトリに `env.d.ts` を作成し、以下のように `ImportMetaEnv` を補ってください:
 
@@ -75,11 +75,11 @@ interface ImportMetaEnv {
 VITE_APP_TITLE=My App
 ```
 
-アプリケーションの中で、`import.meta.env.VITE_APP_TITLE` を利用してタイトルを描画出来ます。
+アプリケーションの中で、`import.meta.env.VITE_APP_TITLE` を利用してタイトルを描画できます。
 
 **モード**は単に development vs. production よりも広い概念であるのを理解することが重要です。典型的な例として、production のような振る舞いを持ちつつ少しだけ production と異なる環境変数を持つ"staging"モードが欲しくなるかもしれません。
 
-`--mode` オプションフラグを渡すことで、コマンドに対して使われるデフォルトモードを上書きすることが出来ます。例えば、アプリケーションを staging モード（が仮にあるとして）向けにビルドしたい場合は以下のようにし:
+`--mode` オプションフラグを渡すことで、コマンドに対して使われるデフォルトモードを上書きすることができます。例えば、アプリケーションを staging モード（が仮にあるとして）向けにビルドしたい場合は以下のようにし:
 
 ```bash
 vite build --mode staging
