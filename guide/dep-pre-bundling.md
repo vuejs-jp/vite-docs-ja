@@ -74,7 +74,7 @@ Viteは、多くの内部モジュールを持つESMの依存関係を単一の�
 
 [`optimizeDeps` 設定オプション](/config/#dep-optimization-options).
 
-`optimizeDeps.include` または `optimizeDeps.exclude`の一般的な使用例は、ソースコードで直接検出できないインポートがある場合です。
+`optimizeDeps.include` または `optimizeDeps.exclude` の一般的な使用例は、ソースコードで直接検出できないインポートがある場合です。
 
 たとえば、インポートはプラグイン変換の結果として作成される可能性があります。
 これは、Viteが最初のスキャンでインポートを検出できないことを意味します。
