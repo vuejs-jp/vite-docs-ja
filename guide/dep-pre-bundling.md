@@ -1,6 +1,6 @@
 # 依存関係の事前バンドル
 
-初めて、 `vite` を実行すると、次のメッセージが表示される場合があります。:
+初めて、`vite` を実行すると、次のメッセージが表示される場合があります。:
 
 ```English
 Optimizable dependencies detected:
