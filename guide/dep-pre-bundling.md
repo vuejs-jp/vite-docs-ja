@@ -91,7 +91,7 @@ Vite は、`node_modules/.vite` に、バンドル済みの依存関係をキャ
 
 いくつかのソースに基づいて、バンドル前のステップを再実行する必要があるかどうか:
 
-- `package.json`の`dependencies`リスト。
+- `package.json` の `dependencies` リスト。
 
 - パッケージマネージャーのロックファイル
 例： `package-lock.json`、`yarn.lock`、または `pnpm-lock.yaml`。
