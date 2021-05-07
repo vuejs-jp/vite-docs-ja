@@ -104,7 +104,7 @@ Vite は、`node_modules/.vite` に、バンドル済みの依存関係をキャ
 
 If for some reason you want to force Vite to re-bundle deps, you can either start the dev server with the `--force` command line option, or manually delete the `node_modules/.vite` cache directory.
 
-何らかの理由で Vite に 外れた場合の再バンドルを強制したい場合は、開発サーバーを `--force` コマンドラインオプションで起動するか、手動で `node_modules/.vite` のキャッシュディレクトリを削除します。
+何らかの理由で Vite に 外れた場合の再バンドルを強制したい場合は、開発サーバを `--force` コマンドラインオプションで起動するか、手動で `node_modules/.vite` のキャッシュディレクトリを削除します。
 
 ### ブラウザー キャッシュ
 
