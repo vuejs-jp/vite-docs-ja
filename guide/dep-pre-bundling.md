@@ -114,6 +114,6 @@ If for some reason you want to force Vite to re-bundle deps, you can either star
 
 ローカルで編集することで、依存関係を作成できます:
 
-1. ブラウザのdevtoolsのネットワークタブからキャッシュを一時的に無効にします。
-2. Vite開発サーバーを`--force`フラグで再起動して、depsを再バンドルします。
+1. ブラウザの devtools のネットワークタブからキャッシュを一時的に無効にします。
+2. Vite開発サーバを`--force`フラグで再起動して、deps を再バンドルします。
 3. ページをリロードします。
