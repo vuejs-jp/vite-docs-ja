@@ -26,7 +26,7 @@ react, react-dom
 
 開発中の Vite のコードは ECMAScriptモジュール として提供しています.
 
-そのため、Viteは、CommonJS または、UMD を ESM[ECMAScriptモジュール]に変換する必要があります。
+そのため、Vite は、CommonJS または、UMD を ESM[ECMAScriptモジュール] に変換する必要があります。
 
 CommonJS の依存関係を変換する場合、
 
