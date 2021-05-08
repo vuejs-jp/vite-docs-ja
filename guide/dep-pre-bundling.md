@@ -2,14 +2,7 @@
 
 初めて、`vite` を実行すると、次のメッセージが表示される場合があります。:
 
-```English
-Optimizable dependencies detected:
-react, react-dom
-Pre-bundling them to speed up dev server page load...
-(this will be run only when your dependencies have changed)
 ```
-
-```Japanese
 最適化可能な依存関係を検出:
 react, react-dom
 これらを事前にバンドルしておくことで、開発サーバーのページの読み込みを高速化することができます...
