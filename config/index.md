@@ -406,7 +406,7 @@ export default async ({ command, mode }) => {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/fallback/, '')
-        }
+        },
         // プロキシインスタンスを使用
         '/api': {
           target: 'http://jsonplaceholder.typicode.com',
