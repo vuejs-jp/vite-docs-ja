@@ -445,7 +445,6 @@ export default async ({ command, mode }) => {
 
   When using `server.middlewareMode` and `server.https`, setting `server.hmr.server` to your HTTPS server will process HMR secure connection requests through your server. This can be helpful when using self-signed certificates.
 
-
 ### server.watch
 
 - **Type:** `object`
@@ -464,6 +463,7 @@ export default async ({ command, mode }) => {
 - **Related:** [SSR - Setting Up the Dev Server](/guide/ssr#setting-up-the-dev-server)
 
 - **Example:**
+
 ```js
 const express = require('express')
 const { createServer: createViteServer } = require('vite')
@@ -488,7 +488,7 @@ async function createServer() {
 createServer()
 ```
 
-### server.fsServe.strict
+### server.fs.strict
 
 - **Experimental**
 - **Type:** `boolean`
@@ -496,12 +496,12 @@ createServer()
 
   Restrict serving files outside of workspace root.
 
-### server.fsServe.root
+### server.fs.allow
 
 - **Experimental**
-- **Type:** `string`
+- **Type:** `string[]`
 
-  Restrict files that could be served via `/@fs/`. When `server.fsServe.strict` is set to `true`, accessing files outside this directory will result in a 403.
+  Restrict files that could be served via `/@fs/`. When `server.fs.strict` is set to `true`, accessing files outside this directory list will result in a 403.
 
   Vite will search for the root of the potential workspace and use it as default. A valid workspace met the following conditions, otherwise will fallback to the [project root](/guide/#index-html-and-project-root).
 
@@ -514,9 +514,11 @@ createServer()
   ```js
   export default {
     server: {
-      fsServe: {
+      fs: {
         // Allow serving files from one level up to the project root
-        root: '..'
+        allow: [
+          '..'
+        ]
       }
     }
   }
@@ -532,7 +534,10 @@ createServer()
 
   最終的なバンドルのブラウザ互換性のターゲット。デフォルトは Vite の特別な値である `'modules'` で、これは[ネイティブの ES モジュールをサポートするブラウザ](https://caniuse.com/es6-module)を対象にします。
 
-  Another special value is 'esnext' - which only performs minimal transpiling (for minification compat) and assumes native dynamic imports support.
+  Another special value is `'esnext'` - which assumes native dynamic imports support and will transpile as little as possible:
+
+  - If the [`build.minify`](#build-minify) option is `'terser'` (the default), `'esnext'` will be forced down to `'es2019'`.
+  - In other cases, it will perform no transpilation at all.
 
   変換は esbuild で実行され、この値は有効な [esbuild の target オプション](https://esbuild.github.io/api/#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザ（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
 
@@ -726,7 +731,7 @@ SSR オプションは、マイナーリリースで調整される可能性が�
 
 ### ssr.noExternal
 
-- **型:** `string[]`
+- **型:** `string | RegExp | (string | RegExp)[]`
 
   指定した依存関係が SSR のために外部化されるのを防ぎます。
 
