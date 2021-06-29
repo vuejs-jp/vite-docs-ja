@@ -532,12 +532,12 @@ createServer()
 - **デフォルト:** `'modules'`
 - **関連:** [Browser Compatibility](/guide/build#browser-compatibility)
 
-  最終的なバンドルのブラウザ互換性のターゲット。デフォルトは Vite の特別な値である `'modules'` で、これは[ネイティブの ES モジュールをサポートするブラウザ](https://caniuse.com/es6-module)を対象にします。
+  最終的なバンドルのブラウザ互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブの ES モジュールをサポートするブラウザ](https://caniuse.com/es6-module)を対象にします。
 
-  Another special value is `'esnext'` - which assumes native dynamic imports support and will transpile as little as possible:
+  もうひとつの特別な値は `'esnext'` で、これはネイディブのダイナミックインポートをサポートしていることを前提としており、トランスパイルが可能な限り少なくなります:
 
-  - If the [`build.minify`](#build-minify) option is `'terser'` (the default), `'esnext'` will be forced down to `'es2019'`.
-  - In other cases, it will perform no transpilation at all.
+  - [`build.minify`](#build-minify) が `'terser'`（デフォルト）の場合、`'esnext'` は強制的に `'es2019'` に下げられます。
+  - それ以外の場合、トランスパイルはまったく行なわれません。
 
   変換は esbuild で実行され、この値は有効な [esbuild の target オプション](https://esbuild.github.io/api/#target)でなければいけません。カスタムターゲットは ES のバージョン（例: `es2015`）、バージョン付きのブラウザ（例: `chrome58`）、または複数のターゲットの文字列の配列を指定できます。
 
