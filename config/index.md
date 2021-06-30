@@ -534,7 +534,7 @@ createServer()
 
   最終的なバンドルのブラウザ互換性のターゲット。デフォルトは Vite の特別な値 `'modules'` で、これは[ネイティブの ES モジュールをサポートするブラウザ](https://caniuse.com/es6-module)を対象にします。
 
-  もうひとつの特別な値は `'esnext'` で、これはネイディブのダイナミックインポートをサポートしていることを前提としており、トランスパイルが可能な限り少なくなります:
+  もうひとつの特別な値は `'esnext'` で、これはネイディブの動的インポートをサポートしていることを前提としており、トランスパイルが可能な限り少なくなります:
 
   - [`build.minify`](#build-minify) が `'terser'`（デフォルト）の場合、`'esnext'` は強制的に `'es2019'` に下げられます。
   - それ以外の場合、トランスパイルはまったく行なわれません。
@@ -548,7 +548,7 @@ createServer()
 - **型:** `boolean`
 - **デフォルト:** `false`
 
-  [dynamic import のポリフィル](https://github.com/GoogleChromeLabs/dynamic-import-polyfill)を自動的に注入するか。
+  [動的インポートのポリフィル](https://github.com/GoogleChromeLabs/dynamic-import-polyfill)を自動的に注入するか。
 
   true に設定すると、各 `index.html` エントリーのプロキシモジュールに自動的にポリフィルが注入されます。`build.rollupOptions.input` によって HTML ではないカスタムエントリーを使用するようにビルドが設定されている場合は、カスタムエントリー内でポリフィルを手動でインポートする必要があります:
 
@@ -558,7 +558,7 @@ createServer()
 
   [`@vitejs/plugin-legacy`](https://github.com/vitejs/vite/tree/main/packages/plugin-legacy) を使う場合、プラグインがこのオプションを自動的に `true` に設定します。
 
-  注意: ポリフィルは[ライブラリモード](/guide/build#library-mode)には適用**されません**。ネイティブの dynamic import がないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けたほうが良いでしょう。
+  注意: ポリフィルは[ライブラリモード](/guide/build#library-mode)には適用**されません**。ネイティブの動的インポートがないブラウザをサポートする必要がある場合は、ライブラリでの使用は避けたほうが良いでしょう。
 
 ### build.outDir
 
